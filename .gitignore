@@ -2,5 +2,8 @@
 ethereum/output/
 ethereum/output-prysm/
 
+# Specification (local only)
+ethereum/SPEC.md
+
 # Validator keys (sensitive)
 ethereum/validator-keys-secret.yaml
