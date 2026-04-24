@@ -1,0 +1,6 @@
+# Generated genesis artifacts (regenerated per deployment)
+ethereum/output/
+ethereum/output-prysm/
+
+# Validator keys (sensitive)
+ethereum/validator-keys-secret.yaml
