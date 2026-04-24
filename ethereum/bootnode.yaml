@@ -1,0 +1,219 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ethereum
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ethereum-bootnode
+  namespace: ethereum
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ethereum-node
+      role: bootnode
+  template:
+    metadata:
+      labels:
+        app: ethereum-node
+        role: bootnode
+      annotations:
+        signoz.io/scrape: "true"
+        signoz.io/port: "6060"
+        signoz.io/scheme: "http"
+    spec:
+      nodeSelector:
+        ethereum-role: bootnode
+      initContainers:
+        - name: init-genesis
+          image: busybox
+          command: ['/bin/sh', '-c']
+          args:
+            - |
+              cp /genesis-cm/genesis.json /genesis/genesis.json
+              cp /genesis-cm/config.yaml /genesis/config.yaml
+              cp /genesis-cm/deposit_contract.txt /genesis/deposit_contract.txt
+              cp /genesis-cm/deposit_contract_block.txt /genesis/deposit_contract_block.txt
+              cp /genesis-cm/deposit_contract_block_hash.txt /genesis/deposit_contract_block_hash.txt
+              cp /genesis-cm/genesis_validators_root.txt /genesis/genesis_validators_root.txt
+              gunzip -c /genesis-cm/genesis.ssz.gz > /genesis/genesis.ssz
+              echo "" > /genesis/bootstrap_nodes.txt
+          volumeMounts:
+            - name: genesis-cm
+              mountPath: /genesis-cm
+            - name: genesis
+              mountPath: /genesis
+        - name: init-geth
+          image: e3vote-cp.iaas.ull.es:8080/custom-geth:latest
+          command: ['/bin/sh', '-c']
+          args:
+            - |
+              if [ ! -d /data/geth/geth/chaindata ]; then
+                geth init --datadir=/data/geth /genesis/genesis.json
+              else
+                echo "Geth already initialized, skipping"
+              fi
+          volumeMounts:
+            - name: geth-data
+              mountPath: /data/geth
+            - name: genesis
+              mountPath: /genesis
+      containers:
+        - name: geth
+          image: e3vote-cp.iaas.ull.es:8080/custom-geth:latest
+          args:
+            - --datadir=/data/geth
+            - --networkid=32382
+            - --http
+            - --http.addr=0.0.0.0
+            - --http.port=8545
+            - --http.api=eth,net,web3,txpool,admin
+            - --http.corsdomain=*
+            - --http.vhosts=*
+            - --ws
+            - --ws.addr=0.0.0.0
+            - --ws.port=8546
+            - --ws.api=eth,net,web3,txpool
+            - --ws.origins=*
+            - --authrpc.addr=0.0.0.0
+            - --authrpc.port=8551
+            - --authrpc.jwtsecret=/jwt/jwtsecret
+            - --authrpc.vhosts=*
+            - --syncmode=full
+            - --miner.gasprice=0
+            - --txpool.pricelimit=0
+            - --port=30303
+            - --discovery.port=30303
+            - --nat=extip:$(POD_IP)
+            - --metrics
+            - --metrics.addr=0.0.0.0
+            - --metrics.port=6060
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          ports:
+            - containerPort: 8545
+            - containerPort: 8546
+            - containerPort: 30303
+              protocol: TCP
+            - containerPort: 30303
+              protocol: UDP
+            - containerPort: 6060
+              name: geth-metrics
+          volumeMounts:
+            - name: geth-data
+              mountPath: /data/geth
+            - name: jwt
+              mountPath: /jwt
+              readOnly: true
+        - name: prysm-beacon
+          image: gcr.io/prysmaticlabs/prysm/beacon-chain:latest
+          args:
+            - --datadir=/data/prysm
+            - --genesis-state=/genesis/genesis.ssz
+            - --chain-config-file=/genesis/config.yaml
+            - --execution-endpoint=http://localhost:8551
+            - --jwt-secret=/jwt/jwtsecret
+            - --contract-deployment-block=0
+            - --chain-id=32382
+            - --accept-terms-of-use
+            - --rpc-host=0.0.0.0
+            - --rpc-port=4000
+            - --grpc-gateway-host=0.0.0.0
+            - --grpc-gateway-port=3500
+            - --p2p-tcp-port=13000
+            - --p2p-udp-port=12000
+            - --min-sync-peers=0
+            - --interop-eth1data-votes
+            - --suggested-fee-recipient=0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134
+            - --minimum-peers-per-subnet=0
+            - --enable-debug-rpc-endpoints
+            - --monitoring-host=0.0.0.0
+            - --monitoring-port=6061
+          ports:
+            - containerPort: 4000
+            - containerPort: 3500
+            - containerPort: 13000
+              protocol: TCP
+            - containerPort: 12000
+              protocol: UDP
+            - containerPort: 6061
+              name: beacon-metrics
+          volumeMounts:
+            - name: prysm-data
+              mountPath: /data/prysm
+            - name: genesis
+              mountPath: /genesis
+            - name: jwt
+              mountPath: /jwt
+              readOnly: true
+        - name: prysm-validator
+          image: gcr.io/prysmaticlabs/prysm/validator:latest
+          args:
+            - --datadir=/data/prysm-validator
+            - --beacon-rpc-provider=localhost:4000
+            - --accept-terms-of-use
+            - --interop-num-validators=1
+            - --interop-start-index=0
+            - --chain-config-file=/genesis/config.yaml
+            - --suggested-fee-recipient=0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134
+            - --monitoring-host=0.0.0.0
+            - --monitoring-port=6062
+          ports:
+            - containerPort: 6062
+              name: val-metrics
+          volumeMounts:
+            - name: prysm-validator-data
+              mountPath: /data/prysm-validator
+            - name: genesis
+              mountPath: /genesis
+      volumes:
+        - name: genesis-cm
+          configMap:
+            name: ethereum-genesis
+        - name: genesis
+          emptyDir: {}
+        - name: jwt
+          secret:
+            secretName: ethereum-jwt
+        - name: geth-data
+          emptyDir: {}
+        - name: prysm-data
+          emptyDir: {}
+        - name: prysm-validator-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ethereum-bootnode
+  namespace: ethereum
+spec:
+  type: ClusterIP
+  selector:
+    app: ethereum-node
+    role: bootnode
+  ports:
+    - name: prysm-rpc
+      port: 4000
+      targetPort: 4000
+    - name: prysm-grpc
+      port: 3500
+      targetPort: 3500
+    - name: geth-rpc
+      port: 8545
+      targetPort: 8545
+    - name: geth-p2p
+      port: 30303
+      targetPort: 30303
+    - name: prysm-p2p-tcp
+      port: 13000
+      targetPort: 13000
+    - name: prysm-p2p-udp
+      port: 12000
+      targetPort: 12000
+      protocol: UDP
