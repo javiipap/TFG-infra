@@ -1,0 +1,1116 @@
+{
+  "description": "Blockchain health, transaction throughput, consensus reliability, and latency.",
+  "tags": [
+    "ethereum",
+    "e3vote",
+    "load-test",
+    "pos"
+  ],
+  "title": "e3vote Chain & Consensus",
+  "version": "v5",
+  "uploadedGrafana": false,
+  "dotMigrated": true,
+  "variables": {},
+  "layout": [
+    {
+      "h": 1,
+      "i": "row-chain",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "h": 6,
+      "i": "w-block-height",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 1
+    },
+    {
+      "h": 6,
+      "i": "w-beacon-slot",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 1
+    },
+    {
+      "h": 6,
+      "i": "w-finalized-epoch",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 7
+    },
+    {
+      "h": 6,
+      "i": "w-peers",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 7
+    },
+    {
+      "h": 1,
+      "i": "row-tx",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 13
+    },
+    {
+      "h": 6,
+      "i": "w-txpool-pending",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 14
+    },
+    {
+      "h": 6,
+      "i": "w-txpool-queued",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 14
+    },
+    {
+      "h": 6,
+      "i": "w-gas-used",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 20
+    },
+    {
+      "h": 1,
+      "i": "row-consensus",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 26
+    },
+    {
+      "h": 6,
+      "i": "w-attest-hit",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 27
+    },
+    {
+      "h": 6,
+      "i": "w-reorgs",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 27
+    },
+    {
+      "h": 1,
+      "i": "row-latency",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 33
+    },
+    {
+      "h": 6,
+      "i": "w-rpc-duration",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 34
+    },
+    {
+      "h": 6,
+      "i": "w-slot-process",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 34
+    },
+    {
+      "h": 1,
+      "i": "row-pressure",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 40
+    },
+    {
+      "h": 6,
+      "i": "w-block-rate",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 41
+    },
+    {
+      "h": 6,
+      "i": "w-beacon-peers",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 41
+    }
+  ],
+  "panelMap": {
+    "row-chain": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-block-height",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 1
+        },
+        {
+          "h": 6,
+          "i": "w-beacon-slot",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 1
+        },
+        {
+          "h": 6,
+          "i": "w-finalized-epoch",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 7
+        },
+        {
+          "h": 6,
+          "i": "w-peers",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 7
+        }
+      ]
+    },
+    "row-tx": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-txpool-pending",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 14
+        },
+        {
+          "h": 6,
+          "i": "w-txpool-queued",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 14
+        },
+        {
+          "h": 6,
+          "i": "w-gas-used",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 20
+        }
+      ]
+    },
+    "row-consensus": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-attest-hit",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 27
+        },
+        {
+          "h": 6,
+          "i": "w-reorgs",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 27
+        }
+      ]
+    },
+    "row-latency": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-rpc-duration",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 34
+        },
+        {
+          "h": 6,
+          "i": "w-slot-process",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 34
+        }
+      ]
+    },
+    "row-pressure": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-block-rate",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 41
+        },
+        {
+          "h": 6,
+          "i": "w-beacon-peers",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 41
+        }
+      ]
+    }
+  },
+  "widgets": [
+    {
+      "id": "row-chain",
+      "panelTypes": "row",
+      "title": "Chain Health",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-block-height",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-block-height-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (chain_head_block)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Block Height",
+      "yAxisUnit": "none"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-beacon-slot",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-beacon-slot-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (beacon_head_slot)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Beacon Head Slot",
+      "yAxisUnit": "none"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-finalized-epoch",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-finalized-epoch-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "finalized {{node}}",
+            "name": "A",
+            "query": "max by (node) (beacon_finalized_epoch)"
+          },
+          {
+            "disabled": false,
+            "legend": "justified {{node}}",
+            "name": "B",
+            "query": "max by (node) (beacon_current_justified_epoch)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Finalized / Justified Epoch",
+      "yAxisUnit": "none"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-peers",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-peers-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (p2p_peers)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Geth P2P Peers",
+      "yAxisUnit": "none"
+    },
+    {
+      "id": "row-tx",
+      "panelTypes": "row",
+      "title": "Transaction Throughput",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-txpool-pending",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-txpool-pending-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (txpool_pending)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Txpool Pending",
+      "yAxisUnit": "none"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-txpool-queued",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-txpool-queued-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (txpool_queued)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Txpool Queued",
+      "yAxisUnit": "none"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-gas-used",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-gas-used-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (txpool_pending) + max by (node) (txpool_queued)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Txpool Total (pending + queued)",
+      "yAxisUnit": "none"
+    },
+    {
+      "id": "row-consensus",
+      "panelTypes": "row",
+      "title": "Consensus Reliability",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-attest-hit",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-attest-hit-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "sum by (node) (rate(validator_successful_attestations[5m]))"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Attestation Rate",
+      "yAxisUnit": "ops"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-reorgs",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-reorgs-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (beacon_reorgs_total)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Chain Reorgs (total)",
+      "yAxisUnit": "none"
+    },
+    {
+      "id": "row-latency",
+      "panelTypes": "row",
+      "title": "Latency",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-rpc-duration",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-rpc-duration-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (rate(rpc_duration_all_count[1m]))"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "RPC Calls/s",
+      "yAxisUnit": "ops"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-slot-process",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-slot-process-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (rate(beacon_head_slot[1m]))"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Beacon Slot Rate",
+      "yAxisUnit": "ops"
+    },
+    {
+      "id": "row-pressure",
+      "panelTypes": "row",
+      "title": "Resource Pressure",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-block-rate",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-block-rate-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (rate(chain_head_block[2m]))"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Block Production Rate",
+      "yAxisUnit": "none"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-beacon-peers",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-beacon-peers-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (p2p_peer_count)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Beacon P2P Peers",
+      "yAxisUnit": "none"
+    }
+  ]
+}

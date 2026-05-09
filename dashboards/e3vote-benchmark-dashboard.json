@@ -1,0 +1,418 @@
+{
+  "description": "Benchmark-specific RPC metrics, missed slots, and attestation delay.",
+  "tags": [
+    "ethereum",
+    "e3vote",
+    "load-test",
+    "pos"
+  ],
+  "title": "e3vote Benchmark",
+  "version": "v5",
+  "uploadedGrafana": false,
+  "dotMigrated": true,
+  "variables": {},
+  "layout": [
+    {
+      "h": 1,
+      "i": "row-benchmark",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "h": 6,
+      "i": "w-rpc-per-method",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 1
+    },
+    {
+      "h": 6,
+      "i": "w-tx-submit-rate",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 1
+    },
+    {
+      "h": 6,
+      "i": "w-rpc-total-rate",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 7
+    },
+    {
+      "h": 6,
+      "i": "w-missed-slots",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 13
+    },
+    {
+      "h": 6,
+      "i": "w-attest-delay",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 13
+    }
+  ],
+  "panelMap": {
+    "row-benchmark": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-rpc-per-method",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 1
+        },
+        {
+          "h": 6,
+          "i": "w-tx-submit-rate",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 1
+        },
+        {
+          "h": 6,
+          "i": "w-rpc-total-rate",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 7
+        }
+      ]
+    }
+  },
+  "widgets": [
+    {
+      "id": "row-benchmark",
+      "panelTypes": "row",
+      "title": "Benchmark RPC",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "Per-method RPC latency (avg ns). Only populated after benchmark runs.",
+      "fillSpans": false,
+      "id": "w-rpc-per-method",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-rpc-per-method-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "sendRawTx {{node}}",
+            "name": "A",
+            "query": "rate(rpc_duration_eth_sendRawTransaction_success_count[1m])"
+          },
+          {
+            "disabled": false,
+            "legend": "estimateGas {{node}}",
+            "name": "B",
+            "query": "rate(rpc_duration_eth_estimateGas_success_count[1m])"
+          },
+          {
+            "disabled": false,
+            "legend": "getTransactionCount {{node}}",
+            "name": "C",
+            "query": "rate(rpc_duration_eth_getTransactionCount_success_count[1m])"
+          },
+          {
+            "disabled": false,
+            "legend": "getBalance {{node}}",
+            "name": "D",
+            "query": "rate(rpc_duration_eth_getBalance_success_count[1m])"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "RPC Calls/s per Method",
+      "yAxisUnit": "ops"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "Rate of eth_sendRawTransaction calls \u2014 direct measure of vote submission throughput.",
+      "fillSpans": false,
+      "id": "w-tx-submit-rate",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-tx-submit-rate-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "rate(rpc_duration_eth_sendRawTransaction_success_count[1m])"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Tx Submission Rate",
+      "yAxisUnit": "ops"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "Total RPC request rate across all methods per node.",
+      "fillSpans": false,
+      "id": "w-rpc-total-rate",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-rpc-total-rate-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "max by (node) (rate(rpc_duration_all_count[1m]))"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Total RPC Rate",
+      "yAxisUnit": "ops"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "Difference between expected clock slot and actual head slot (aggregated across nodes). Non-zero = missed slots.",
+      "fillSpans": false,
+      "id": "w-missed-slots",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-missed-slots-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "missed slots",
+            "name": "A",
+            "query": "max(beacon_clock_time_slot) - max(beacon_head_slot)"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Missed Slots (clock - head)",
+      "yAxisUnit": "none"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "Cumulative successful attestations per validator. Flat = validator not attesting.",
+      "fillSpans": false,
+      "id": "w-attest-delay",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-attest-delay-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "validator_successful_attestations"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Successful Attestations",
+      "yAxisUnit": "none"
+    }
+  ]
+}

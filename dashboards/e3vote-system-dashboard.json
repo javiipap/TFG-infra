@@ -1,0 +1,862 @@
+{
+  "description": "Per-node CPU, memory, disk, and network metrics.",
+  "tags": [
+    "ethereum",
+    "e3vote",
+    "load-test",
+    "pos"
+  ],
+  "title": "e3vote System Resources",
+  "version": "v5",
+  "uploadedGrafana": false,
+  "dotMigrated": true,
+  "variables": {},
+  "layout": [
+    {
+      "h": 1,
+      "i": "row-cpu",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "h": 6,
+      "i": "w-missed-slots",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 1
+    },
+    {
+      "h": 6,
+      "i": "w-attest-delay",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 1
+    },
+    {
+      "h": 6,
+      "i": "w-cpu-usage",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 7
+    },
+    {
+      "h": 6,
+      "i": "w-load-avg",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 7
+    },
+    {
+      "h": 1,
+      "i": "row-memory",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 13
+    },
+    {
+      "h": 6,
+      "i": "w-mem-usage",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 14
+    },
+    {
+      "h": 6,
+      "i": "w-mem-used",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 14
+    },
+    {
+      "h": 1,
+      "i": "row-disk",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 20
+    },
+    {
+      "h": 6,
+      "i": "w-disk-io",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 21
+    },
+    {
+      "h": 6,
+      "i": "w-disk-ops",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 21
+    },
+    {
+      "h": 1,
+      "i": "row-net",
+      "maxH": 1,
+      "minH": 1,
+      "minW": 12,
+      "moved": false,
+      "static": false,
+      "w": 12,
+      "x": 0,
+      "y": 27
+    },
+    {
+      "h": 6,
+      "i": "w-net-io",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 0,
+      "y": 28
+    },
+    {
+      "h": 6,
+      "i": "w-net-errors",
+      "moved": false,
+      "static": false,
+      "w": 6,
+      "x": 6,
+      "y": 28
+    }
+  ],
+  "panelMap": {
+    "row-cpu": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-missed-slots",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 1
+        },
+        {
+          "h": 6,
+          "i": "w-attest-delay",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 1
+        },
+        {
+          "h": 6,
+          "i": "w-cpu-usage",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 7
+        },
+        {
+          "h": 6,
+          "i": "w-load-avg",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 7
+        }
+      ]
+    },
+    "row-memory": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-mem-usage",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 14
+        },
+        {
+          "h": 6,
+          "i": "w-mem-used",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 14
+        }
+      ]
+    },
+    "row-disk": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-disk-io",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 21
+        },
+        {
+          "h": 6,
+          "i": "w-disk-ops",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 21
+        }
+      ]
+    },
+    "row-net": {
+      "collapsed": false,
+      "widgets": [
+        {
+          "h": 6,
+          "i": "w-net-io",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 0,
+          "y": 28
+        },
+        {
+          "h": 6,
+          "i": "w-net-errors",
+          "moved": false,
+          "static": false,
+          "w": 6,
+          "x": 6,
+          "y": 28
+        }
+      ]
+    }
+  },
+  "widgets": [
+    {
+      "id": "row-cpu",
+      "panelTypes": "row",
+      "title": "System \u2014 CPU",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "Difference between expected clock slot and actual head slot. Non-zero = missed slots.",
+      "fillSpans": false,
+      "id": "w-missed-slots",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-missed-slots-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{node}}",
+            "name": "A",
+            "query": "beacon_clock_time_slot - beacon_head_slot"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Missed Slots (clock - head)",
+      "yAxisUnit": "none"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "Attestation inclusion delay in slots (histogram). Lower is better; 1 slot = optimal.",
+      "fillSpans": false,
+      "id": "w-attest-delay",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-attest-delay-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "avg {{node}}",
+            "name": "A",
+            "query": "rate(attestation_inclusion_delay_slots_sum[5m]) / rate(attestation_inclusion_delay_slots_count[5m])"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Attestation Inclusion Delay (slots)",
+      "yAxisUnit": "none"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-cpu-usage",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-cpu-usage-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{host.name}}",
+            "name": "A",
+            "query": "1 - (sum by (\"host.name\") (rate({\"system.cpu.time\", state=\"idle\"}[5m])) / sum by (\"host.name\") (rate({\"system.cpu.time\"}[5m])))"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "CPU Usage by Node",
+      "yAxisUnit": "percentunit"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-load-avg",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-load-avg-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{host.name}}",
+            "name": "A",
+            "query": "{\"system.cpu.load_average.1m\"}"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Load Average (1m)",
+      "yAxisUnit": "none"
+    },
+    {
+      "id": "row-memory",
+      "panelTypes": "row",
+      "title": "System \u2014 Memory",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-mem-usage",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-mem-usage-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{host.name}}",
+            "name": "A",
+            "query": "{\"system.memory.usage\", state=\"used\"}"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Memory Usage by Node",
+      "yAxisUnit": "bytes"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-mem-used",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-mem-used-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{host.name}}",
+            "name": "A",
+            "query": "sum by (\"host.name\") ({\"system.memory.usage\", state=\"used\"}) / sum by (\"host.name\") ({\"system.memory.usage\"})"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Memory Utilization %",
+      "yAxisUnit": "percentunit"
+    },
+    {
+      "id": "row-disk",
+      "panelTypes": "row",
+      "title": "System \u2014 Disk",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-disk-io",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-disk-io-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{host.name}} {{direction}}",
+            "name": "A",
+            "query": "rate({\"system.disk.io\"}[5m])"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Disk I/O (bytes/s)",
+      "yAxisUnit": "bytes"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-disk-ops",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-disk-ops-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{host.name}} {{direction}}",
+            "name": "A",
+            "query": "rate({\"system.disk.operations\"}[5m])"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Disk Operations/s",
+      "yAxisUnit": "ops"
+    },
+    {
+      "id": "row-net",
+      "panelTypes": "row",
+      "title": "System \u2014 Network",
+      "description": ""
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-net-io",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-net-io-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{host.name}} {{direction}}",
+            "name": "A",
+            "query": "rate({\"system.network.io\"}[5m])"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Network I/O (bytes/s)",
+      "yAxisUnit": "bytes"
+    },
+    {
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "description": "",
+      "fillSpans": false,
+      "id": "w-net-errors",
+      "isStacked": false,
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [],
+          "queryFormulas": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "w-net-errors-q",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "{{host.name}} {{direction}}",
+            "name": "A",
+            "query": "sum by (\"host.name\", direction) (rate({\"system.network.errors\"}[5m])) + sum by (\"host.name\", direction) (rate({\"system.network.dropped\"}[5m]))"
+          }
+        ],
+        "queryType": "promql"
+      },
+      "selectedLogFields": [
+        {
+          "dataType": "string",
+          "name": "body",
+          "type": ""
+        },
+        {
+          "dataType": "string",
+          "name": "timestamp",
+          "type": ""
+        }
+      ],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL_TIME",
+      "title": "Network Errors + Drops",
+      "yAxisUnit": "short"
+    }
+  ]
+}
