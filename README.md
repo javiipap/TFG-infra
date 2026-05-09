@@ -131,10 +131,10 @@ This deploys:
 
 The `presets.prometheus` section in `signoz-k8s-infra-values.yaml` configures the OTel agents to scrape Prometheus-format metrics from each Ethereum pod. Three custom scrape jobs target the metrics endpoints:
 
-| Job | Container | Port | Metrics |
-|-----|-----------|------|---------|
-| `ethereum-geth` | geth | 6060 | EL: peers, txpool, chain head, RPC latency, DB stats |
-| `ethereum-beacon` | prysm-beacon | 6061 | CL: slot processing, attestations, sync status, P2P |
+| Job                  | Container       | Port | Metrics                                              |
+| -------------------- | --------------- | ---- | ---------------------------------------------------- |
+| `ethereum-geth`      | geth            | 6060 | EL: peers, txpool, chain head, RPC latency, DB stats |
+| `ethereum-beacon`    | prysm-beacon    | 6061 | CL: slot processing, attestations, sync status, P2P  |
 | `ethereum-validator` | prysm-validator | 6062 | Validator: proposals, attestations, balance tracking |
 
 Each OTel agent uses a node-affinity relabel rule (`__meta_kubernetes_pod_node_name` = `${env:K8S_NODE_NAME}`) to scrape only the Ethereum pod on its own node. This avoids duplicate metrics and cross-node traffic.
@@ -241,6 +241,7 @@ cd ethereum/
 ```
 
 `deploy.sh` does the following:
+
 1. Creates the `ethereum` namespace, ConfigMap (genesis files), and JWT secret
 2. Labels worker01 as the bootnode
 3. **Stage 1**: Deploys `bootnode.yaml` — a single Deployment on worker01 with a ClusterIP service, waits for ready
@@ -248,6 +249,7 @@ cd ethereum/
 5. **Stage 3**: Deploys `dora.yaml` — blockchain explorer on the control plane
 
 Each pod runs 3 containers:
+
 - **geth** (custom fork v1.17) — execution layer
 - **prysm-beacon** — consensus layer (beacon node)
 - **prysm-validator** — block proposer (uses `--interop-num-validators=1 --interop-start-index=N`)
@@ -273,21 +275,21 @@ curl -s http://localhost:30545 -X POST -H "Content-Type: application/json" \
 
 Two accounts are prefunded in `genesis-in.json` with known private keys:
 
-| Address | Private Key |
-|---------|-------------|
+| Address                                      | Private Key                                                          |
+| -------------------------------------------- | -------------------------------------------------------------------- |
 | `0x123463a4b065722e99115d6c222f267d9cabb524` | `0x2e0834786285daccd064ca17f1654f67b4aef298acbb82cef9ec422fb4975622` |
 | `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266` | `0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80` |
 
 ### 4.5 Architecture
 
 ```
-                    ┌──────────────────────────────────┐
+                    ┌───────────────────────────────────┐
                     │  worker01 (bootnode)              │
                     │  Deployment + ClusterIP svc       │
-                    │  ┌────────┬────────┬───────────┐ │
-                    │  │  geth  │ prysm  │  prysm    │ │
-                    │  │  (EL)  │ beacon │  validator │ │
-                    │  └────────┴────────┴───────────┘ │
+                    │  ┌────────┬────────┬───────────┐  │
+                    │  │  geth  │ prysm  │  prysm    │  │
+                    │  │  (EL)  │ beacon │  validator│  │
+                    │  └────────┴────────┴───────────┘  │
                     └──────────────┬────────────────────┘
                                    │ ENR / enode
               ┌────────────────────┼────────────────────┐
@@ -295,9 +297,9 @@ Two accounts are prefunded in `genesis-in.json` with known private keys:
    ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐
    │ worker02 (peer)  │ │ worker03 (peer)  │ │  ... worker08    │
    │ DaemonSet        │ │ DaemonSet        │ │  DaemonSet       │
-   │ ┌────┬────┬────┐ │ │ ┌────┬────┬────┐ │ │ ┌────┬────┬────┐│
-   │ │geth│bcon│vald│ │ │ │geth│bcon│vald│ │ │ │geth│bcon│vald││
-   │ └────┴────┴────┘ │ │ └────┴────┴────┘ │ │ └────┴────┴────┘│
+   │ ┌────┬────┬────┐ │ │ ┌────┬────┬────┐ │ │ ┌────┬────┬────┐ │
+   │ │geth│bcon│vald│ │ │ │geth│bcon│vald│ │ │ │geth│bcon│vald│ │
+   │ └────┴────┴────┘ │ │ └────┴────┴────┘ │ │ └────┴────┴────┘ │
    └──────────────────┘ └──────────────────┘ └──────────────────┘
 
    Control plane: Dora explorer (port 8081)

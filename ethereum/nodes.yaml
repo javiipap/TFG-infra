@@ -14,10 +14,6 @@ spec:
       labels:
         app: ethereum-node
         role: peer
-      annotations:
-        signoz.io/scrape: "true"
-        signoz.io/port: "6060"
-        signoz.io/scheme: "http"
     spec:
       affinity:
         nodeAffinity:
@@ -161,6 +157,7 @@ spec:
                 --txpool.pricelimit=0 \
                 --port=30303 --discovery.port=30303 \
                 --nat=extip:${POD_IP} \
+                --rpc.evmtimeout=180s \
                 --metrics --metrics.addr=0.0.0.0 --metrics.port=6060 \
                 --bootnodes=$(cat /shared/bootnode-enode)
           env:
@@ -286,6 +283,7 @@ metadata:
   namespace: ethereum
 spec:
   type: NodePort
+  externalTrafficPolicy: Local
   selector:
     app: ethereum-node
   ports:

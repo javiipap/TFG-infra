@@ -3,77 +3,93 @@ global:
   clusterName: e3vote
   deploymentEnvironment: production
 # Replace with the IP/hostname of your external SigNoz server
-otelCollectorEndpoint: 2.137.120.37:8080
+otelCollectorEndpoint: 2.137.121.183:8080
 otelInsecure: true
 presets:
   otlpExporter:
     enabled: true
   loggingExporter:
     enabled: false
-  prometheus:
-    enabled: true
-    scrapeInterval: 30s
-    scrapeConfigs:
-      # Geth execution layer metrics (port 6060)
-      - job_name: ethereum-geth
-        kubernetes_sd_configs:
-          - role: pod
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_namespace]
-            regex: ethereum
-            action: keep
-          - source_labels: [__meta_kubernetes_pod_container_name]
-            regex: geth
-            action: keep
-          - source_labels: [__meta_kubernetes_pod_node_name]
-            regex: ${env:K8S_NODE_NAME}
-            action: keep
-          - source_labels: [__meta_kubernetes_pod_ip]
-            target_label: __address__
-            replacement: $1:6060
-          - source_labels: [__meta_kubernetes_pod_node_name]
-            target_label: node
-          - source_labels: [__meta_kubernetes_pod_name]
-            target_label: pod
-      # Prysm beacon chain metrics (port 6061)
-      - job_name: ethereum-beacon
-        kubernetes_sd_configs:
-          - role: pod
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_namespace]
-            regex: ethereum
-            action: keep
-          - source_labels: [__meta_kubernetes_pod_container_name]
-            regex: prysm-beacon
-            action: keep
-          - source_labels: [__meta_kubernetes_pod_node_name]
-            regex: ${env:K8S_NODE_NAME}
-            action: keep
-          - source_labels: [__meta_kubernetes_pod_ip]
-            target_label: __address__
-            replacement: $1:6061
-          - source_labels: [__meta_kubernetes_pod_node_name]
-            target_label: node
-          - source_labels: [__meta_kubernetes_pod_name]
-            target_label: pod
-      # Prysm validator metrics (port 6062)
-      - job_name: ethereum-validator
-        kubernetes_sd_configs:
-          - role: pod
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_namespace]
-            regex: ethereum
-            action: keep
-          - source_labels: [__meta_kubernetes_pod_container_name]
-            regex: prysm-validator
-            action: keep
-          - source_labels: [__meta_kubernetes_pod_node_name]
-            regex: ${env:K8S_NODE_NAME}
-            action: keep
-          - source_labels: [__meta_kubernetes_pod_ip]
-            target_label: __address__
-            replacement: $1:6062
-          - source_labels: [__meta_kubernetes_pod_node_name]
-            target_label: node
-          - source_labels: [__meta_kubernetes_pod_name]
-            target_label: pod
+# Ethereum metrics scraping — injected into the DaemonSet agent so each node
+# scrapes its own pods (the preset puts configs in the single Deployment pod).
+otelAgent:
+  config:
+    receivers:
+      hostmetrics:
+        collection_interval: 10s
+      prometheus/ethereum:
+        config:
+          global:
+            scrape_interval: 10s
+          scrape_configs:
+            # Geth execution layer metrics (port 6060)
+            - job_name: ethereum-geth
+              metrics_path: /debug/metrics/prometheus
+              scrape_interval: 10s
+              kubernetes_sd_configs:
+                - role: pod
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_namespace]
+                  regex: ethereum
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_container_name]
+                  regex: geth
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_node_name]
+                  regex: ${env:K8S_NODE_NAME}
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_ip]
+                  target_label: __address__
+                  replacement: $1:6060
+                - source_labels: [__meta_kubernetes_pod_node_name]
+                  target_label: node
+                - source_labels: [__meta_kubernetes_pod_name]
+                  target_label: pod
+            # Prysm beacon chain metrics (port 6061)
+            - job_name: ethereum-beacon
+              scrape_interval: 10s
+              kubernetes_sd_configs:
+                - role: pod
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_namespace]
+                  regex: ethereum
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_container_name]
+                  regex: prysm-beacon
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_node_name]
+                  regex: ${env:K8S_NODE_NAME}
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_ip]
+                  target_label: __address__
+                  replacement: $1:6061
+                - source_labels: [__meta_kubernetes_pod_node_name]
+                  target_label: node
+                - source_labels: [__meta_kubernetes_pod_name]
+                  target_label: pod
+            # Prysm validator metrics (port 6062)
+            - job_name: ethereum-validator
+              scrape_interval: 10s
+              kubernetes_sd_configs:
+                - role: pod
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_namespace]
+                  regex: ethereum
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_container_name]
+                  regex: prysm-validator
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_node_name]
+                  regex: ${env:K8S_NODE_NAME}
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_ip]
+                  target_label: __address__
+                  replacement: $1:6062
+                - source_labels: [__meta_kubernetes_pod_node_name]
+                  target_label: node
+                - source_labels: [__meta_kubernetes_pod_name]
+                  target_label: pod
+    service:
+      pipelines:
+        metrics:
+          receivers: [otlp, hostmetrics, kubeletstats, prometheus/ethereum]
