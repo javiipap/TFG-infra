@@ -154,6 +154,8 @@ spec:
                 --authrpc.jwtsecret=/jwt/jwtsecret --authrpc.vhosts=* \
                 --syncmode=full \
                 --miner.gasprice=0 \
+                --miner.gaslimit=600000000 \
+                --miner.recommit=3s \
                 --txpool.pricelimit=0 \
                 --port=30303 --discovery.port=30303 \
                 --nat=extip:${POD_IP} \
